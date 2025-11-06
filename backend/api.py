@@ -1,5 +1,13 @@
 from fastapi import FastAPI
-from database import select_db
+from fastapi.middleware.cors import CORSMiddleware
 from backend.routes.users import router as users_router
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(users_router, prefix="/api")
