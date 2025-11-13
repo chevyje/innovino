@@ -1,4 +1,4 @@
-from database import insert_db, select_db
+from database import insert_db, select_db, query_db
 from datetime import datetime, timezone, timedelta
 
 def create_session(user_id: int):
@@ -17,3 +17,7 @@ def check_user_session(user_id: int):
     if len(sessions) == 0:
         return None
     return sessions[0][0]
+
+def invalidate_session(session_id: str):
+    expire_date = datetime(1900, 1,1, tzinfo=timezone.utc)
+    query_db("UPDATE sessions SET expires_at = %s WHERE id = %s", (expire_date, session_id))
