@@ -22,3 +22,12 @@
     background-color: white;
     color: black;
 }
+
+.secondary:hover {
+    box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+}
+
+.secondary:active {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4);
+    border: 1px rgba(0, 0, 0, 0.5) solid;
+}
