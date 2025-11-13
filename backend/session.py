@@ -2,7 +2,7 @@ from database import insert_db, select_db
 from datetime import datetime, timezone, timedelta
 
 def create_session(user_id: int):
-    expire_date = datetime.now(timezone.utc) + timedelta(minutes=2)
+    expire_date = datetime.now(timezone.utc) + timedelta(minutes=30)
     session_id = insert_db("INSERT INTO sessions (user_id, expires_at) VALUES (%s, %s) RETURNING id", (user_id, expire_date))
     return session_id
 
