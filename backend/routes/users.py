@@ -1,13 +1,19 @@
-from fastapi import APIRouter
-from fastapi.responses import JSONResponse
-from backend.database import select_db, insert_db
-from backend.session import create_session, check_user_session
 from pydantic import BaseModel
+from typing import Annotated
 import bcrypt
+
+# Fast api
+from fastapi import APIRouter, Header
+from fastapi.responses import JSONResponse
+
+# Internal
+from backend.database import select_db, insert_db
+from backend.session import create_session, invalidate_session
 
 class User(BaseModel):
     username: str
     password: str
+
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -31,6 +37,11 @@ def auth(user: User):
     # return new session to the user.
     session_id = create_session(user_id)
     return {"message": "Login successful", "session_id": session_id}
+
+@router.get("/logout")
+async def logout(x_api_key: Annotated[str | None, Header()] = None):
+    invalidate_session(x_api_key)
+    return {"message": "Logout successful"}
 
 @router.post("/")
 def create_user(user: User):
