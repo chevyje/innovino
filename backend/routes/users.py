@@ -1,25 +1,47 @@
-from fastapi import APIRouter
-from fastapi.responses import JSONResponse
-from backend.database import select_db, insert_db
 from pydantic import BaseModel
+from typing import Annotated
 import bcrypt
+
+# Fast api
+from fastapi import APIRouter, Header
+from fastapi.responses import JSONResponse
+
+# Internal
+from backend.database import select_db, insert_db
+from backend.session import create_session, invalidate_session
 
 class User(BaseModel):
     username: str
     password: str
 
+
 router = APIRouter(prefix="/users", tags=["users"])
 
 @router.post("/auth")
 def auth(user: User):
-    users = select_db("SELECT password FROM users WHERE username = %s", (user.username.lower(),))
+    users = select_db("SELECT id, password FROM users WHERE username = %s", (user.username.lower(),))
+
+    # Check if a user with the username exists
     if len(users) != 1:
         return JSONResponse(status_code=401, content={"message": "Invalid username"})
-    server_password = users[0][0].encode('utf-8')
+
+    # Define username and password
+    user_id = users[0][0]
+    server_password = users[0][1].encode('utf-8')
+
+    # Encode given password from user
     client_password = user.password.encode('utf-8')
     if not bcrypt.checkpw(client_password, server_password):
         return JSONResponse(status_code=401, content={"message": "Invalid password"})
-    return {"message": "Login successful"}
+
+    # return new session to the user.
+    session_id = create_session(user_id)
+    return {"message": "Login successful", "session_id": session_id}
+
+@router.get("/logout")
+async def logout(x_api_key: Annotated[str | None, Header()] = None):
+    invalidate_session(x_api_key)
+    return {"message": "Logout successful"}
 
 @router.post("/")
 def create_user(user: User):
