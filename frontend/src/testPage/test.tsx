@@ -6,6 +6,11 @@ export default function TestPage() {
     return (
         <>
             <div className={Style.container}>
+                <p className={Style.header}>Header</p>
+                <p className={Style.subtitle}>Subtitle</p>
+                <p className={Style.body}>Body</p>
+            </div>
+            <div className={Style.container}>
                 <Link title={"Dit is een link"} path={"/test"}/>
             </div>
             <div className={Style.container}>

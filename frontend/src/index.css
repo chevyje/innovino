@@ -4,6 +4,10 @@
   --secondary-color: #212529;
   --background-color: #ffffff;
 
+  --header-text-size: 3rem;
+  --subtitle-text-size: 1.75rem;
+  --body-text-size: 1rem;
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

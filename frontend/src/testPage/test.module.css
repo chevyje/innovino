@@ -7,3 +7,18 @@
     align-items: center;
     gap: 2rem;
 }
+
+.header{
+    color: black;
+    font-size: var(--header-text-size);
+}
+
+.subtitle {
+    color: black;
+    font-size: var(--subtitle-text-size);
+}
+
+.body {
+    color: black;
+    font-size: var(--body-text-size);
+}

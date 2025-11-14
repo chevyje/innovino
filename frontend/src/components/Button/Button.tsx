@@ -3,7 +3,7 @@ import Style from "./button.module.css"
 interface Props {
     title?: string,
     variant?: string,
-    action?: any;
+    action?: any,
 }
 
 export default function Button({ title, variant, action }: Props) {
