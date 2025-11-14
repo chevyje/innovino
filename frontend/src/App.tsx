@@ -7,7 +7,7 @@ function App() {
             <Routes>
                 <Route path="/test" element={<TestPage />} />
             </Routes>
-            {/*<LoginPage />*/}
+            <LoginPage />
         </BrowserRouter>
     );
 }
