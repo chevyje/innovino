@@ -16,7 +16,7 @@ app = FastAPI(lifespan=lifespan)
 
 @app.middleware("http")
 async def check_api_key(request: Request, call_next):
-    return handle_api_key_middleware(request, call_next)
+    return await handle_api_key_middleware(request, call_next)
 
 app.add_middleware(
     CORSMiddleware,

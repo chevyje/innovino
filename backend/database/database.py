@@ -1,6 +1,7 @@
 import psycopg2
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Load env
 load_dotenv()
@@ -25,7 +26,8 @@ def connect_db():
 
         # create tables
         print('Creating tables...')
-        with open("schema.sql") as schema:
+        schema_path = Path(__file__).with_name('schema.sql')
+        with open(schema_path, "r") as schema:
             cur.execute(schema.read())
             connection.commit()
             print("Successfully created all the tables.")
