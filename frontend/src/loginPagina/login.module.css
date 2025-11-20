@@ -10,7 +10,7 @@
 
 .wrapper {
     width: 50%;
-    height: 50%;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,18 +39,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
 
 .inputField {
     background-color: white;
+    color: black;
     opacity: 200%;
     height: 30px;
     width: 100%;
     font-size: 16px;
     border: 1px solid black;
     border-radius: 8px;
-    margin-bottom: 3%;
-    padding-left: 1%;
     outline: none;
     box-sizing: border-box;
 }
@@ -68,15 +68,35 @@
 .button {
     background-color: #e0412b;
     color: white;
-    width: 30%;
+    width: 200px;
+    height: 60px;
     font-size: 24px;
     padding: 10px 20px;
     border-radius: 15px;
-    border: none;
 }
 
 .button:hover {
-    background-color: #E0412B;
     font-weight: bold;
     border: none;
+}
+
+.optionsRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.forgotPassword {
+    color: black;
+    cursor: pointer;
+    margin: 0;
+}
+
+.forgotPassword:hover{
+    color: #e0412b;
+    text-decoration: underline;
 }

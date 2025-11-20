@@ -1,5 +1,6 @@
 import Style from "./login.module.css"
 import Logo from "../assets/Cuimed-logo.jpg"
+import CheckBox from "../components/CheckBox/CheckBox"
 
 export default function loginPage() {
     function loginSubmit (formData: any){
@@ -17,9 +18,15 @@ export default function loginPage() {
                             <p className={Style.tag}>Gebruikersnaam</p>
                             <input type={"text"} name={"username"} className={Style.inputField} />
                             <p className={Style.tag}>Wachtwoord</p>
-                            <input type={"password"} name={"password"} className={Style.inputField}/>
-                            
+                            <input type="password" name="password" className={Style.inputField} />
+                            <div className={Style.optionsRow}>
+                                <CheckBox name="remember" label="Gegevens onthouden" />
+
+                                <p className={Style.forgotPassword}>Wachtwoord vergeten?</p>
+                            </div>
+
                             <button className={Style.button}>Log in</button>
+
                         </form>
                     </div>
                 </div>
