@@ -1,21 +1,39 @@
-// import LoginPage from "./loginPagina/login.tsx";
-
-// function App() {
-//   return (
-//     <>
-//       <LoginPage />
-//     </>
-//   )
-// }
-
-// export default App
 import LoginPage from './loginPagina/login';
 import ProductOverview from './productOverview/ProductOverview';
+import ProductDetail from './productDetail/ProductDetail';
+import CartSummary from './cart/CartSummary';
 
 function App() {
-    const isProductsPage = window.location.pathname.startsWith('/products');
+    const sessionId = localStorage.getItem('session_id');
+    if (!sessionId) {
+        return <LoginPage />;
+    }
 
-    return isProductsPage ? <ProductOverview /> : <LoginPage />;
+    const path = window.location.pathname;
+
+    if (path.startsWith('/products/')) {
+        const idPart = path.split('/').pop();
+        const productId = Number(idPart);
+        if (!Number.isNaN(productId)) {
+            return (
+                <>
+                    <CartSummary />
+                    <ProductDetail productId={productId} sessionId={sessionId} />
+                </>
+            );
+        }
+    }
+
+    if (path === '/products') {
+        return (
+            <>
+                <CartSummary />
+                <ProductOverview sessionId={sessionId} />
+            </>
+        );
+    }
+
+    return <LoginPage />;
 }
 
 export default App;
