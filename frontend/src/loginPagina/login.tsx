@@ -30,6 +30,7 @@ interface User {
     username: string
     password: string
 }
+
 function auth (user: User) {
     const headers: Headers = new Headers()
     headers.set("Content-Type", "application/json")
