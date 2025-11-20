@@ -9,6 +9,8 @@ from fastapi.responses import JSONResponse
 
 # Routers
 from backend.routes.users import router as users_router
+from backend.routes.products import router as products_router
+
 
 # Internal codes
 from database import connect_db
@@ -59,3 +61,4 @@ app.add_middleware(
 )
 
 app.include_router(users_router, prefix="/api")
+app.include_router(products_router, prefix="/api")

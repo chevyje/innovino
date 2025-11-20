@@ -12,3 +12,16 @@ CREATE TABLE IF NOT EXISTS sessions (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     expires_at TIMESTAMPTZ NOT NULL
   );
+
+CREATE TABLE IF NOT EXISTS products (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  image_url TEXT,
+  price NUMERIC(10,2) NOT NULL DEFAULT 0.00,
+  description TEXT,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
+  category TEXT, -- vul later in of importeer vanuit map
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  CONSTRAINT products_name_unique UNIQUE (name)
+);
