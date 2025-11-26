@@ -8,6 +8,13 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
   backend:
     build:
       context: ./backend
@@ -21,15 +28,12 @@ services:
 
   db:
     image: postgres:18
-    container_name: db
-    environment:
-      POSTGRES_DB: innovino
-      POSTGRES_USER: innovino
-      POSTGRES_PASSWORD: innovino
+    env_file:
+      - ./backend/.env.db
     ports:
       - "5432:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
 
 volumes:
   db-data:
