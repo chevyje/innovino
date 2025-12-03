@@ -2,10 +2,23 @@ import Style from "./test.module.css"
 import Button from "../components/Button/Button.tsx";
 import Link from "../components/Link/Link.tsx";
 import Card from "../components/Card/Card.tsx";
+import Banner from "../components/Banner/Banner.tsx";
 
 export default function TestPage() {
     return (
         <>
+            <Banner title="Informatie" variant="info">
+                Informatie
+            </Banner>
+
+            <Banner title="Waarschuwing" variant="warning">
+                Waarschuwing
+            </Banner>
+
+            <Banner title="Andere informatie" variant="note">
+                Banner
+            </Banner>
+
             <Card>
                 <p className={Style.header}>Header</p>
                 <p className={Style.subtitle}>Subtitle</p>
